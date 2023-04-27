@@ -108,6 +108,8 @@
         [@[ AVCaptureDeviceTypeBuiltInWideAngleCamera, AVCaptureDeviceTypeBuiltInTelephotoCamera ]
             mutableCopy];
     if (@available(iOS 13.0, *)) {
+      [discoveryDevices insertObject:AVCaptureDeviceTypeBuiltInDualCamera atIndex: 0];
+      [discoveryDevices insertObject:AVCaptureDeviceTypeBuiltInTripleCamera atIndex: 0];
       [discoveryDevices addObject:AVCaptureDeviceTypeBuiltInUltraWideCamera];
     }
     AVCaptureDeviceDiscoverySession *discoverySession = [AVCaptureDeviceDiscoverySession
@@ -131,6 +133,7 @@
           break;
       }
       [reply addObject:@{
+        @"type" : [device deviceType],
         @"name" : [device uniqueID],
         @"lensFacing" : lensFacing,
         @"sensorOrientation" : @90,
